@@ -51,7 +51,9 @@ credit_ai_system/
 ### 1. Клонирование репозитория
 
 ```bash
-git clone <ссылка-на-репозиторий>
+git clone https://github.com/VoOneChek/sme-credit-risk-ai.git
+```
+```bash
 cd credit_ai_system
 ```
 
