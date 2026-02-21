@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+jinja2
+pydantic
+python-multipart
+numpy
+scikit-learn
+sqlalchemy 
+databases 
+pandas 
+pdfplumber 
+passlib[bcrypt] 
+python-multipart

@@ -1,0 +1,134 @@
+2026-02-21 14:39:55,315 - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "D:\credit_ai_system\.venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2026-02-21 14:40:17,112 - WARNING - Неудачный вход: S
+2026-02-21 14:40:24,951 - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "D:\credit_ai_system\.venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2026-02-21 14:56:02,345 - INFO - Новый пользователь: Vladimir
+2026-02-21 14:56:10,925 - INFO - Вход пользователя: Vladimir
+2026-02-21 14:56:35,468 - INFO - Вход пользователя: admin
+2026-02-21 14:57:03,758 - INFO - Вход пользователя: Vladimir
+2026-02-21 14:57:26,945 - INFO - Заявка от Vladimir: ООО Принтер
+2026-02-21 14:58:35,685 - INFO - Вход пользователя: admin
+2026-02-21 15:29:54,847 - INFO - Новый пользователь: Vladimir
+2026-02-21 15:29:59,596 - INFO - Вход пользователя: Vladimir
+2026-02-21 15:31:47,712 - INFO - Заявка от Vladimir: ООО Принтер
+2026-02-21 15:32:55,421 - INFO - Вход пользователя: admin
+2026-02-21 15:33:21,942 - INFO - Вход пользователя: Vladimir
+2026-02-21 15:45:36,281 - INFO - Вход пользователя: admin
+2026-02-21 15:46:58,124 - INFO - Запуск переобучения
+2026-02-21 15:47:52,293 - INFO - Вход пользователя: Vladimir
+2026-02-21 15:49:38,892 - INFO - Заявка от Vladimir: ООО Агросервис
+2026-02-21 15:52:10,476 - INFO - Заявка от Vladimir: ООО Агросервис
+2026-02-21 15:52:21,179 - INFO - Заявка от Vladimir: ООО Агросервис
+2026-02-21 15:56:27,299 - INFO - Заявка от Vladimir: ООО Агросервис
+2026-02-21 16:07:43,434 - INFO - Новый пользователь: Vladimir
+2026-02-21 16:07:46,440 - INFO - Вход пользователя: Vladimir
+2026-02-21 16:08:40,485 - INFO - Заявка от Vladimir: ООО Принтер
+2026-02-21 16:09:02,965 - INFO - Заявка от Vladimir: ООО Принтер
+2026-02-21 16:09:05,342 - INFO - Заявка от Vladimir: ООО Принтер
+2026-02-21 16:09:07,285 - INFO - Заявка от Vladimir: ООО Принтер
+2026-02-21 16:09:09,261 - INFO - Заявка от Vladimir: ООО Принтер
+2026-02-21 16:09:11,182 - INFO - Заявка от Vladimir: ООО Принтер
+2026-02-21 16:14:10,582 - INFO - Вход пользователя: admin
+2026-02-21 16:17:52,330 - INFO - Удален юзер: Vladimir
+2026-02-21 16:18:07,148 - WARNING - Неудачный вход: Vladimir
+2026-02-21 16:18:11,076 - INFO - Новый пользователь: Vladimir
+2026-02-21 16:18:14,150 - INFO - Вход пользователя: Vladimir
+2026-02-21 16:18:29,431 - WARNING - Неудачный вход: admin
+2026-02-21 16:18:33,844 - INFO - Вход пользователя: admin
+2026-02-21 16:18:40,272 - INFO - Удален юзер: Vladimir
+2026-02-21 16:18:58,912 - INFO - Новый пользователь: Viktor
+2026-02-21 16:19:04,888 - INFO - Вход пользователя: Viktor
+2026-02-21 16:31:43,434 - INFO - Вход пользователя: admin
+2026-02-21 16:33:01,363 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 16:43:43,164 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 16:46:14,824 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 16:46:14,848 - ERROR - Ошибка анализа: 1 validation error for RiskReport
+risk_type
+  Input should be 'финансовый', 'операционный' or 'отраслевой' [type=enum, input_value='прогнозный', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/enum
+2026-02-21 16:52:28,874 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 17:01:38,687 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 17:20:40,268 - INFO - Запуск переобучения
+2026-02-21 17:20:54,513 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 17:38:10,123 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 17:46:18,280 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 18:31:15,394 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 18:35:20,873 - INFO - Запуск процедуры дообучения модели...
+2026-02-21 18:35:21,036 - ERROR - Ошибка при обучении: cannot import name 'analysis_service' from 'app.services.analysis_service' (D:\credit_ai_system\app\services\analysis_service.py)
+2026-02-21 18:37:30,819 - WARNING - Неудачный вход: Vladimir
+2026-02-21 18:37:37,007 - INFO - Вход пользователя: Viktor
+2026-02-21 18:37:43,558 - INFO - Вход пользователя: admin
+2026-02-21 18:37:47,630 - INFO - Удален юзер: Viktor
+2026-02-21 18:37:55,726 - INFO - Новый пользователь: Vladimir
+2026-02-21 18:37:58,546 - INFO - Вход пользователя: Vladimir
+2026-02-21 18:38:08,520 - INFO - Вход пользователя: admin
+2026-02-21 19:58:39,236 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 21:27:05,562 - INFO - Вход пользователя: Vladimir
+2026-02-21 21:27:30,592 - INFO - Заявка от Vladimir: Принт
+2026-02-21 21:27:58,523 - INFO - Вход пользователя: admin
+2026-02-21 21:28:59,773 - INFO - Вход пользователя: Vladimir
+2026-02-21 21:39:54,206 - INFO - Вход пользователя: admin
+2026-02-21 21:42:12,565 - INFO - Админ admin удалил правило ID 1
+2026-02-21 21:42:30,268 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 21:43:14,208 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 21:47:57,516 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 21:47:57,524 - ERROR - Ошибка анализа: division by zero
+2026-02-21 21:48:10,627 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 21:48:10,636 - ERROR - Ошибка анализа: division by zero
+2026-02-21 21:48:35,718 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 21:50:35,405 - INFO - Админ admin добавил правило: Низкая ликвидность
+2026-02-21 21:51:23,869 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 22:00:56,600 - INFO - Заявка от admin: ООО Агросервис
+2026-02-21 22:02:32,143 - INFO - Запуск процедуры дообучения модели...
+2026-02-21 22:02:32,612 - ERROR - Ошибка при обучении: cannot import name 'analysis_service' from 'app.services.analysis_service' (D:\credit_ai_system\app\services\analysis_service.py)
+2026-02-21 22:04:21,845 - INFO - Запуск процедуры дообучения модели...
+2026-02-21 22:04:22,379 - ERROR - Ошибка при обучении: cannot import name 'analysis_service' from 'app.services.analysis_service' (D:\credit_ai_system\app\services\analysis_service.py)
+2026-02-21 22:17:20,696 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 22:18:27,166 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 22:18:27,168 - INFO - CSV: Найдено debt_to_equity = 0.68 в колонке 'capital_leverage_ratio'
+2026-02-21 22:18:27,168 - INFO - CSV: Найдено net_profit_margin = 0.27 в колонке 'operating_margin_share'
+2026-02-21 22:18:27,168 - INFO - CSV: Найдено company_age = 0.52 в колонке 'operational_coverage_ratio'
+2026-02-21 22:21:22,041 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 22:21:22,060 - INFO - PDF: Найдено current_ratio = 1.47
+2026-02-21 22:21:22,060 - INFO - PDF: Найдено debt_to_equity = 0.82
+2026-02-21 22:21:22,061 - INFO - PDF: Найдено net_profit_margin = 0.34
+2026-02-21 22:28:05,424 - INFO - Запуск процедуры дообучения модели...
+2026-02-21 22:28:05,789 - ERROR - Ошибка при обучении: cannot import name 'analysis_service' from 'app.services.analysis_service' (D:\credit_ai_system\app\services\analysis_service.py)
+2026-02-21 22:30:18,240 - INFO - Запуск процедуры дообучения модели...
+2026-02-21 22:30:18,778 - INFO - Модель успешно перезагружена в памяти.
+2026-02-21 22:34:16,592 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 22:34:16,607 - INFO - PDF: Найдено current_ratio = 1.47
+2026-02-21 22:34:16,608 - INFO - PDF: Найдено debt_to_equity = 0.82
+2026-02-21 22:34:16,608 - INFO - PDF: Найдено net_profit_margin = 0.34
+2026-02-21 22:34:28,134 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 22:34:28,148 - INFO - PDF: Найдено current_ratio = 1.47
+2026-02-21 22:34:28,148 - INFO - PDF: Найдено debt_to_equity = 0.82
+2026-02-21 22:34:28,148 - INFO - PDF: Найдено net_profit_margin = 0.34
+2026-02-21 22:34:41,530 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 22:34:41,541 - ERROR - Ошибка анализа: division by zero
+2026-02-21 22:35:03,219 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 22:35:36,997 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 22:37:33,391 - INFO - Админ admin добавил правило: Отсутствие прибыли
+2026-02-21 22:37:48,612 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 23:18:13,638 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 23:18:13,647 - ERROR - Ошибка анализа: 'AnalysisService' object has no attribute 'evaluate_rule_severity'
+2026-02-21 23:18:37,432 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 23:18:37,439 - ERROR - Ошибка анализа: 'AnalysisService' object has no attribute 'evaluate_rule_severity'
+2026-02-21 23:20:09,559 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 23:20:09,567 - ERROR - Ошибка анализа: module 'app.services.kb_service' has no attribute 'evaluate_rule_severity'
+2026-02-21 23:21:55,098 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 23:22:22,189 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 23:22:39,014 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 23:22:50,540 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 23:26:54,972 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 23:27:51,167 - INFO - Заявка от admin: АО «Нова Индастриз»
+2026-02-21 23:52:47,861 - INFO - Заявка от admin: АО «Нова жизнь»

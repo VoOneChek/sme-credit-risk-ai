@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1>Панель администратора</h1>
+    <div>
+        <a href="/"><button style="background-color: #28a745;">К анализу</button></a>
+        <a href="/logout"><button style="background-color: #6c757d;">Выход</button></a>
+    </div>
+</div>
+
+<!-- Блок управления -->
+<div style="margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 5px;">
+    <h3>Управление системой</h3>
+    <a href="/admin/stats"><button style="background-color: #6f42c1;">Аналитика</button></a>
+    <!-- Кнопка обучения с JS обработчиком -->
+    <button onclick="startRetrain()" style="background-color: #ffc107; color: black;">Дообучить модель</button>
+    <a href="/admin/download_log"><button style="background-color: #17a2b8;">Скачать логи</button></a>
+</div>
+
+<hr>
+
+<h2>Пользователи</h2>
+<table border="1" cellpadding="5" style="width: 100%; border-collapse: collapse;">
+    <tr style="background: #eee;">
+        <th>ID</th><th>Логин</th><th>Роль</th><th>Действие</th>
+    </tr>
+    {% for u in users %}
+    <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.username }}</td>
+        <td>{{ u.role }}</td>
+        <td>
+            {% if u.role != 'admin' %}
+            <form action="/admin/delete_user/{{ u.id }}" method="post" style="display:inline;">
+                <button type="submit" style="background-color: red; color: white; padding: 2px 5px;">Удалить</button>
+            </form>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<hr>
+
+<h2>База знаний (Правила)</h2>
+<p><small>Правила используются для объяснения рисков пользователю. Расчет рейтинга делает ML-модель.</small></p>
+
+<!-- Форма добавления правила -->
+<div style="background: #e9ecef; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+    <h4 id="form_title">Добавить новое правило</h4>
+    <form action="/admin/add_rule" method="post" id="rule_form">
+        <!-- Скрытое поле для ID (нужно для редактирования) -->
+        <input type="hidden" name="rule_id" id="rule_id_input" value="">
+        
+        <!-- Скрипт поменяет action формы при редактировании -->
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <div>
+                <label>Тип:</label>
+                <select name="risk_type" id="edit_risk_type">
+                    <option value="финансовый">Финансовый</option>
+                    <option value="операционный">Операционный</option>
+                    <option value="отраслевой">Отраслевой</option>
+                </select>
+            </div>
+            <div>
+                <label>Название:</label>
+                <input type="text" name="rule_name" id="edit_rule_name" required>
+            </div>
+            <div>
+                <label>Поле:</label>
+                <select name="field" id="edit_field">
+                    <option value="current_ratio">Ликвидность</option>
+                    <option value="debt_to_equity">Долг</option>
+                    <option value="net_profit_margin">Рентабельность</option>
+                    <option value="company_age">Возраст</option>
+                </select>
+            </div>
+            <div>
+                <label>Условие:</label>
+                <select name="op" id="edit_op">
+                    <option value="<">Меньше (<)</option>
+                    <option value=">">Больше (>)</option>
+                    <option value="==">Равно (=)</option>
+                </select>
+            </div>
+            <div>
+                <label>Значение:</label>
+                <input type="text" name="val" id="edit_val" required style="width: 60px;">
+            </div>
+            <div>
+                <label>Серьезность:</label>
+                <select name="severity" id="edit_severity">
+                    <option value="критический">Критический</option>
+                    <option value="средний">Средний</option>
+                    <option value="низкий">Низкий</option>
+                </select>
+            </div>
+        </div>
+        <div style="margin-top: 10px;">
+            <label>Рекомендация:</label>
+            <input type="text" name="recommendation" id="edit_recommendation" style="width: 100%;" required>
+        </div>
+        <button type="submit" id="submit_btn" style="margin-top: 10px;">Добавить правило</button>
+        <button type="button" onclick="resetForm()" style="margin-top: 10px; background-color: #6c757d;">Отмена</button>
+    </form>
+</div>
+
+<!-- Таблица правил -->
+<table border="1" cellpadding="5" style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr style="background: #eee;">
+            <th>Тип</th>
+            <th>Название</th>
+            <th>Условие</th>
+            <th>Серьезность</th>
+            <th>Рекомендация</th>
+            <th style="width: 100px;">Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in rules %}
+        <tr>
+            <td>{{ r.risk_type }}</td>
+            <td>{{ r.rule_name }}</td>
+            <td>{{ r.condition_json.field }} {{ r.condition_json.op }} {{ r.condition_json.val }}</td>
+            <td>{{ r.severity }}</td>
+            <td>{{ r.recommendation }}</td>
+            <td>
+                <!-- Используем data-атрибуты вместо аргументов в onclick -->
+                <button 
+                    class="edit-btn" 
+                    data-id="{{ r.id }}" 
+                    data-type="{{ r.risk_type }}" 
+                    data-name="{{ r.rule_name }}" 
+                    data-field="{{ r.condition_json.field }}" 
+                    data-op="{{ r.condition_json.op }}" 
+                    data-val="{{ r.condition_json.val }}" 
+                    data-severity="{{ r.severity }}" 
+                    data-rec="{{ r.recommendation }}"
+                    style="background-color: #ffc107; padding: 2px 5px; cursor: pointer;">
+                    ✎
+                </button>
+                
+                <form action="/admin/delete_rule/{{ r.id }}" method="post" style="display:inline;">
+                    <button type="submit" style="background-color: red; color: white; padding: 2px 5px;">X</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    // Обработчик кликов для всех кнопок редактирования
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            // Читаем данные из атрибутов
+            const id = this.dataset.id;
+            const type = this.dataset.type;
+            const name = this.dataset.name;
+            const field = this.dataset.field;
+            const op = this.dataset.op;
+            const val = this.dataset.val;
+            const severity = this.dataset.severity;
+            const rec = this.dataset.rec;
+
+            // Заполняем форму
+            document.getElementById('rule_id_input').value = id;
+            document.getElementById('edit_risk_type').value = type;
+            document.getElementById('edit_rule_name').value = name;
+            document.getElementById('edit_field').value = field;
+            document.getElementById('edit_op').value = op;
+            document.getElementById('edit_val').value = val;
+            document.getElementById('edit_severity').value = severity;
+            document.getElementById('edit_recommendation').value = rec;
+
+            // Меняем вид формы
+            document.getElementById('form_title').innerText = "Редактирование правила #" + id;
+            document.getElementById('rule_form').action = "/admin/edit_rule/" + id;
+            document.getElementById('submit_btn').innerText = "Сохранить изменения";
+            document.getElementById('submit_btn').style.backgroundColor = "#ffc107";
+            
+            window.scrollTo(0, 0);
+        });
+    });
+
+    function resetForm() {
+        document.getElementById('rule_id_input').value = "";
+        document.getElementById('form_title').innerText = "Добавить новое правило";
+        document.getElementById('rule_form').action = "/admin/add_rule";
+        document.getElementById('submit_btn').innerText = "Добавить правило";
+        document.getElementById('submit_btn').style.backgroundColor = "#28a745";
+        document.getElementById('rule_form').reset();
+    }
+</script>
+{% endblock %}

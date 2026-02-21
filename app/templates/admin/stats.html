@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Аналитика системы</h1>
+<p><a href="/admin">Назад в админку</a></p>
+
+<div style="display: flex; gap: 20px; margin-bottom: 20px;">
+    <div class="stats" style="flex: 1; text-align: center;">
+        <h3>Всего заявок</h3>
+        <h1>{{ total_apps }}</h1>
+    </div>
+    <div class="stats" style="flex: 1; text-align: center;">
+        <h3>Средний рейтинг</h3>
+        <h1>{{ avg_rating }}</h1>
+    </div>
+</div>
+
+<div style="display: flex; gap: 20px;">
+    <div style="flex: 1;">
+        <h3>Топ-5 частых рисков</h3>
+        <table border="1" cellpadding="5" width="100%" style="border-collapse: collapse;">
+            <tr style="background: #eee;"><th>Источник</th><th>Количество</th></tr>
+            {% for source, count in top_risks %}
+            <tr>
+                <td>{{ source }}</td>
+                <td style="text-align:center;">{{ count }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="2">Нет данных</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div style="flex: 1;">
+        <h3>Заявки по отраслям</h3>
+        <table border="1" cellpadding="5" width="100%" style="border-collapse: collapse;">
+            <tr style="background: #eee;"><th>Отрасль</th><th>Кол-во заявок</th></tr>
+            {% for ind, count in industries %}
+            <tr>
+                <td>{{ ind }}</td>
+                <td style="text-align:center;">{{ count }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="2">Нет данных</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h1>Результат анализа</h1>
+    <div>
+        {% if user %}
+            <span>{{ user.username }}</span>
+            <a href="/profile"><button style="background-color: #6c757d;">В профиль</button></a>
+            <a href="/logout"><button style="background-color: #dc3545;">Выход</button></a>
+        {% else %}
+            <a href="/login"><button>Войти</button></a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="stats">
+    <h3>Рейтинг кредитоспособности: <span style="font-size: 24px;">{{ result.rating }}/100</span></h3>
+    <p><strong>Статистика:</strong></p>
+    <ul>
+        <li>Входных параметров: {{ result.statistics.input_params }}</li>
+        <li>Обнаружено рисков: {{ result.statistics.risks_found }}</li>
+    </ul>
+</div>
+
+<hr>
+
+<h2>Заключение:</h2>
+
+{% if result.risks %}
+    <div class="risk-card" style="background: #fff3cd; border-left-color: #ffc107;">
+        <strong>{{ result.summary }}</strong>
+    </div>
+    
+    <h3>Детализация рисков:</h3>
+    {% for risk in result.risks %}
+    <div class="risk-card">
+        <p><strong>Тип:</strong> {{ risk.risk_type.value }}</p>
+        <p><strong>Источник:</strong> {{ risk.source }}</p>
+        
+        <p><strong>Серьезность:</strong> 
+            <span class="{% if risk.severity.value == 'критический' %}text-danger{% else %}text-warning{% endif %}">
+                {{ risk.severity.value }}
+            </span>
+        </p>
+        
+        <p><strong>Рекомендация:</strong> {{ risk.recommendation }}</p>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="stats" style="background-color: #d4edda; color: #155724; text-align: center;">
+        <h3>{{ result.summary }}</h3>
+        <p>Профиль заемщика соответствует требованиям.</p>
+    </div>
+{% endif %}
+
+<br>
+<div style="display: flex; gap: 10px;">
+    <a href="/"><button>Новая заявка</button></a>
+</div>
+
+{% endblock %}

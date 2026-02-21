@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h2>Личный кабинет</h2>
+    <div>
+        {% if user.role == 'admin' %}
+            <a href="/admin"><button style="background-color: #dc3545;">Админ-панель</button></a>
+        {% endif %}
+        <a href="/"><button style="background-color: #28a745;">Новый анализ</button></a>
+        <a href="/logout"><button style="background-color: #6c757d;">Выход</button></a>
+    </div>
+</div>
+<p>Привет, <strong>{{ user.username }}</strong>!</p>
+
+<h3>История моих заявок</h3>
+{% if history %}
+<table border="1" cellpadding="8" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+    <tr style="background: #eee;">
+        <th>Дата</th>
+        <th>Компания</th>
+        <th>Рейтинг</th>
+        <th>Детали</th>
+    </tr>
+    {% for app in history %}
+    <tr>
+        <td>{{ app.created_at.strftime('%d.%m.%Y %H:%M') if app.created_at else app.id }}</td>
+        <td>{{ app.company_name }}</td>
+        <td style="text-align: center;"><b>{{ app.rating }}</b></td>
+        <td><a href="/history/{{ app.id }}"><button style="padding: 2px 5px;">Открыть</button></a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>Вы еще не подавали заявок.</p>
+{% endif %}
+{% endblock %}

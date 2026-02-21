@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+
+{# Добавляем стили для карточек рисков прямо сюда #}
+<style>
+    .risk-card-critical {
+        border-left: 5px solid #dc3545;
+        background-color: #fff3f3;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+    }
+    .risk-card-medium {
+        border-left: 5px solid #ffc107;
+        background-color: #fff8e1;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+    }
+    .risk-card-low {
+        border-left: 5px solid #17a2b8;
+        background-color: #e8f4f8;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+    }
+</style>
+
+<div style="display: flex; justify-content: space-between;">
+    <h2>Заявка #{{ app.id }}</h2>
+    <a href="/profile"><button>Назад</button></a>
+</div>
+<p><small>Дата: {{ app.created_at.strftime('%d.%m.%Y %H:%M') }}</small></p>
+
+<div class="stats">
+    <h3>Результат: {{ app.company_name }}</h3>
+    <p><strong>Рейтинг:</strong> 
+        <span class="{% if app.rating > 70 %}text-success{% elif app.rating > 40 %}text-warning{% else %}text-danger{% endif %}">
+            {{ app.rating }}
+        </span>
+    </p>
+</div>
+
+<hr>
+
+<h3>Входные данные</h3>
+<table>
+    <tr><th>Показатель</th><th>Значение</th></tr>
+    {% for key, value in app.financial_data.items() %}
+    <tr>
+        <td>{{ labels.get(key, key) }}</td>
+        <td>{{ value }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Найденные риски</h3>
+{% if risks %}
+    {% for risk in risks %}
+    
+    {# --- Выбираем класс в зависимости от серьезности --- #}
+    {% if risk.severity == 'критический' %}
+        <div class="risk-card-critical">
+    {% elif risk.severity == 'средний' %}
+        <div class="risk-card-medium">
+    {% else %}
+        <div class="risk-card-low">
+    {% endif %}
+        <p><strong>Тип:</strong> {{ risk.risk_type }}</p>
+        <p><strong>Источник:</strong> {{ risk.source }}</p>
+        <p><strong>Серьезность:</strong> {{ risk.severity }}</p>
+        <p><strong>Рекомендация:</strong> {{ risk.recommendation }}</p>
+    </div>
+    {% endfor %}
+{% else %}
+    <p class="text-success">Риски не обнаружены.</p>
+{% endif %}
+{% endblock %}
